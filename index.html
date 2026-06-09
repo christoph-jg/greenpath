@@ -647,8 +647,7 @@
       .nav-right {
         position: absolute;
         top: 100%; left: 0; right: 0;
-        background: rgba(243, 251, 245, 0.98);
-        backdrop-filter: blur(20px);
+        background: #f1faf4;
         flex-direction: column;
         gap: 0;
         padding: 0 24px;
@@ -657,7 +656,11 @@
         transition: max-height .3s ease, padding .3s ease;
         border-bottom: 1px solid var(--line);
       }
-      .nav-right.open { max-height: 420px; padding: 14px 24px 24px; }
+      .nav-right.open {
+        max-height: 420px;
+        padding: 14px 24px 24px;
+        box-shadow: 0 24px 40px rgba(14, 61, 31, 0.12);
+      }
       .nav-links { display: flex; flex-direction: column; gap: 0; width: 100%; }
       .nav-links a { padding: 13px 0; border-bottom: 1px solid var(--line); }
       .nav-cta { display: inline-flex !important; margin-top: 16px; width: 100%; }

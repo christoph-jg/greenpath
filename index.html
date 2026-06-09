@@ -3,18 +3,85 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GreenPath | Digital Safety Education</title>
+
+  <title>GreenPath | Digital Safety &amp; Scam Prevention Education</title>
+  <meta name="description" content="GreenPath delivers practical digital-safety seminars and workshops that help seniors, families, and communities recognize scams, avoid fraud, and stay confident online." />
+  <meta name="theme-color" content="#15622f" />
+  <link rel="canonical" href="https://greenpath.pages.dev/" />
+
+  <!-- Favicon / touch icon -->
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="apple-touch-icon" href="logo.png" />
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="GreenPath | Digital Safety &amp; Scam Prevention Education" />
+  <meta property="og:description" content="Practical seminars that help seniors, families, and communities recognize scams and stay safe online." />
+  <meta property="og:image" content="logo.png" />
+  <meta property="og:url" content="https://greenpath.pages.dev/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="GreenPath | Digital Safety Education" />
+  <meta name="twitter:description" content="Practical seminars that help communities recognize scams and stay safe online." />
+  <meta name="twitter:image" content="logo.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Structured data for search engines -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "GreenPath",
+    "description": "Digital safety and scam prevention education for seniors, families, and communities.",
+    "url": "https://greenpath.pages.dev/",
+    "logo": "https://greenpath.pages.dev/logo.png",
+    "email": "info@greenpath.com",
+    "telephone": "+1-402-555-0123",
+    "founder": [
+      { "@type": "Person", "name": "Jadian Green" },
+      { "@type": "Person", "name": "Julian Green" }
+    ],
+    "areaServed": "United States",
+    "knowsAbout": ["Scam prevention", "Phishing awareness", "Identity protection", "Online safety for seniors"]
+  }
+  </script>
 
   <style>
+    :root {
+      --green-900: #0e3d1f;
+      --green-800: #134a27;
+      --green-700: #15622f;
+      --green-600: #1d7a3c;
+      --green-500: #2e9e4f;
+      --green-400: #57c14e;
+      --green-300: #8fdc8a;
+      --mint-100: #e7f8ec;
+      --mint-50: #f3fbf5;
+      --ink: #0f1a14;
+      --muted: #5b6b60;
+      --line: rgba(15, 60, 31, 0.10);
+      --shadow-sm: 0 10px 30px rgba(14, 61, 31, 0.06);
+      --shadow-md: 0 20px 55px rgba(14, 61, 31, 0.08);
+      --shadow-lg: 0 28px 80px rgba(14, 61, 31, 0.16);
+      --radius: 26px;
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
-      color: #111;
-      background: linear-gradient(180deg, #ffffff 0%, #f8fff9 100%);
-      line-height: 1.6;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--mint-50);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
+
+    a { color: inherit; }
 
     .container {
       max-width: 1150px;
@@ -22,494 +89,606 @@
       padding: 0 24px;
     }
 
+    /* ---------- Buttons ---------- */
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--green-500), var(--green-700));
+      color: #fff;
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 12px 26px rgba(21, 98, 47, 0.28);
+      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+    }
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 34px rgba(21, 98, 47, 0.34);
+    }
+    .button-light {
+      background: #fff;
+      color: var(--green-800);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+    }
+    .button-light:hover { box-shadow: var(--shadow-md); }
+
+    /* ---------- Nav ---------- */
     nav {
       position: sticky;
       top: 0;
-      z-index: 50;
-      background: rgba(255,255,255,0.78);
-      backdrop-filter: blur(22px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+      z-index: 100;
+      background: rgba(243, 251, 245, 0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--line);
     }
-
     .nav-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 0;
+      padding: 12px 0;
+      gap: 18px;
     }
-
-    .nav-logo img {
-      height: 52px;
-      display: block;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 26px;
-      font-size: 0.95rem;
-    }
-
+    .nav-logo img { height: 46px; width: auto; display: block; }
+    .nav-right { display: flex; align-items: center; gap: 26px; }
+    .nav-links { display: flex; gap: 26px; font-size: 0.95rem; }
     .nav-links a {
-      color: #333;
+      color: #2c382f;
       text-decoration: none;
       font-weight: 500;
+      position: relative;
+      padding: 4px 0;
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0; height: 2px;
+      background: var(--green-500);
+      transition: width .25s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      padding: 10px 20px;
+      font-size: 0.92rem;
+      box-shadow: 0 8px 18px rgba(21, 98, 47, 0.24);
+    }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .nav-toggle span {
+      width: 24px; height: 2px;
+      background: var(--green-800);
+      border-radius: 2px;
+      transition: .25s ease;
     }
 
+    /* ---------- Hero ---------- */
     .hero {
       position: relative;
       overflow: hidden;
-      min-height: 88vh;
+      min-height: 90vh;
       display: flex;
       align-items: center;
       text-align: center;
     }
-
     .hero::before {
       content: "";
       position: absolute;
-      width: 720px;
-      height: 720px;
-      background: radial-gradient(circle, rgba(78, 200, 120, 0.25), transparent 65%);
-      top: -260px;
-      left: -200px;
+      width: 720px; height: 720px;
+      background: radial-gradient(circle, rgba(46, 158, 79, 0.22), transparent 65%);
+      top: -260px; left: -200px;
       border-radius: 50%;
       animation: floatOne 13s ease-in-out infinite alternate;
-      z-index: -1;
+      z-index: 0;
     }
-
     .hero::after {
       content: "";
       position: absolute;
-      width: 640px;
-      height: 640px;
-      background: radial-gradient(circle, rgba(180, 245, 205, 0.45), transparent 68%);
-      bottom: -260px;
-      right: -180px;
+      width: 640px; height: 640px;
+      background: radial-gradient(circle, rgba(143, 220, 138, 0.40), transparent 68%);
+      bottom: -260px; right: -180px;
       border-radius: 50%;
       animation: floatTwo 15s ease-in-out infinite alternate;
-      z-index: -1;
+      z-index: 0;
     }
+    .hero .container { position: relative; z-index: 1; }
 
     @keyframes floatOne {
       from { transform: translate(0,0) scale(1); }
       to { transform: translate(80px,60px) scale(1.08); }
     }
-
     @keyframes floatTwo {
       from { transform: translate(0,0) scale(1); }
       to { transform: translate(-80px,-50px) scale(1.1); }
     }
 
-    .hero-logo {
-      width: 250px;
-      max-width: 72%;
-      margin-bottom: 34px;
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--mint-100);
+      color: var(--green-700);
+      border: 1px solid rgba(46, 158, 79, 0.22);
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      margin-bottom: 26px;
+    }
+    .eyebrow .dot-live {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--green-500);
+      box-shadow: 0 0 0 0 rgba(46,158,79,.5);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(46,158,79,.5); }
+      70% { box-shadow: 0 0 0 8px rgba(46,158,79,0); }
+      100% { box-shadow: 0 0 0 0 rgba(46,158,79,0); }
     }
 
+    .hero-logo { width: 230px; max-width: 70%; margin-bottom: 30px; }
+
     h1 {
-      font-size: clamp(3rem, 7vw, 6.8rem);
-      line-height: 0.96;
+      font-size: clamp(2.9rem, 7vw, 6.4rem);
+      line-height: 0.98;
       font-weight: 800;
-      letter-spacing: -0.075em;
-      margin-bottom: 28px;
+      letter-spacing: -0.04em;
+      margin-bottom: 24px;
+    }
+    h1 .accent {
+      background: linear-gradient(120deg, var(--green-500), var(--green-700));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .subtitle {
-      font-size: 1.35rem;
-      color: #5d5d5d;
-      max-width: 780px;
-      margin: 0 auto 42px;
+      font-size: 1.3rem;
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0 auto 38px;
     }
 
-    .button {
-      display: inline-block;
-      background: #111;
-      color: #fff;
-      text-decoration: none;
-      padding: 14px 28px;
-      border-radius: 999px;
-      font-weight: 700;
-      transition: 0.2s ease;
-    }
+    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-    .button:hover {
-      transform: translateY(-2px);
-      opacity: 0.88;
+    .hero-trust {
+      margin-top: 40px;
+      display: flex;
+      gap: 26px;
+      justify-content: center;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 500;
     }
+    .hero-trust span { display: inline-flex; align-items: center; gap: 8px; }
+    .hero-trust svg { width: 18px; height: 18px; color: var(--green-500); flex-shrink: 0; }
 
-    .button-light {
-      background: #f1f1f1;
-      color: #111;
-      margin-left: 10px;
-    }
-
-    section { padding: 110px 0; }
+    /* ---------- Sections ---------- */
+    section { padding: 110px 0; position: relative; }
 
     h2 {
-      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-size: clamp(2.1rem, 4vw, 3.4rem);
       line-height: 1.05;
-      margin-bottom: 22px;
-      letter-spacing: -0.055em;
+      margin-bottom: 20px;
+      letter-spacing: -0.04em;
+      font-weight: 800;
     }
-
     .section-text {
-      max-width: 780px;
-      color: #555;
+      max-width: 760px;
+      color: var(--muted);
       font-size: 1.15rem;
     }
-
     .center { text-align: center; }
     .center .section-text { margin-left: auto; margin-right: auto; }
+    .kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--green-600);
+      margin-bottom: 14px;
+      display: block;
+    }
 
+    /* ---------- Value band ---------- */
+    .value-band { background: linear-gradient(180deg, var(--mint-50), #fff); padding: 70px 0; }
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .value-item { text-align: center; padding: 12px; }
+    .value-item .num {
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(120deg, var(--green-500), var(--green-700));
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .value-item p { color: var(--muted); font-weight: 500; margin-top: 4px; }
+
+    /* ---------- Cards ---------- */
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
       gap: 24px;
       margin-top: 52px;
     }
-
     .card {
-      background: rgba(255,255,255,0.84);
-      border: 1px solid rgba(0,0,0,0.07);
+      background: #fff;
+      border: 1px solid var(--line);
       padding: 34px;
-      border-radius: 30px;
-      box-shadow: 0 20px 55px rgba(0,0,0,0.04);
-      transition: 0.25s ease;
+      border-radius: 28px;
+      box-shadow: var(--shadow-sm);
+      transition: transform .25s ease, box-shadow .25s ease;
+      text-align: left;
     }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 24px 65px rgba(0,0,0,0.07);
+    .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+    .card-icon {
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--mint-100), #fff);
+      border: 1px solid rgba(46, 158, 79, 0.2);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px;
+      color: var(--green-600);
     }
+    .card-icon svg { width: 28px; height: 28px; }
+    .card h3 { font-size: 1.28rem; margin-bottom: 10px; letter-spacing: -0.02em; }
+    .card p { color: var(--muted); }
 
-    .card h3 {
-      font-size: 1.28rem;
-      margin-bottom: 12px;
-      letter-spacing: -0.03em;
-    }
-
-    .card p { color: #666; }
-
+    /* ---------- Training showcase ---------- */
     .training-showcase {
-      background: #111;
-      color: white;
-      border-radius: 42px;
+      background: radial-gradient(120% 120% at 0% 0%, #1b5c30 0%, #0e3d1f 55%, #0b3019 100%);
+      color: #fff;
+      border-radius: 40px;
       padding: 70px 46px;
-      box-shadow: 0 28px 80px rgba(0,0,0,0.18);
+      box-shadow: var(--shadow-lg);
       overflow: hidden;
-    }
-
-    .training-showcase p {
-      color: #d4d4d4;
-    }
-
-    .slides {
       position: relative;
-      min-height: 310px;
-      margin-top: 46px;
     }
-
-    .slide {
-      display: none;
-      animation: fade 0.35s ease;
-    }
-
+    .training-showcase .kicker { color: var(--green-300); }
+    .training-showcase .section-text { color: #cfe6d6; }
+    .slides { position: relative; min-height: 320px; margin-top: 46px; }
+    .slide { display: none; animation: fade .4s ease; }
     .slide.active {
       display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
+      grid-template-columns: 0.85fr 1.15fr;
       gap: 42px;
       align-items: center;
     }
-
     @keyframes fade {
       from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     .slide-number {
-      width: 92px;
-      height: 92px;
-      border-radius: 26px;
-      background: linear-gradient(135deg, #2fd16b, #155f35);
+      width: 88px; height: 88px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, var(--green-400), var(--green-700));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.9rem; font-weight: 800;
+      margin-bottom: 20px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.25);
+    }
+    .slide h3 {
+      font-size: clamp(1.8rem, 4vw, 3.1rem);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+      margin-bottom: 16px;
+    }
+    .slide > div > p { color: #cfe6d6; }
+    .slide ul { list-style: none; display: grid; gap: 12px; }
+    .slide li {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 15px 18px 15px 44px;
+      border-radius: 16px;
+      color: #eafaef;
+      position: relative;
+    }
+    .slide li::before {
+      content: "";
+      position: absolute;
+      left: 16px; top: 50%;
+      width: 16px; height: 16px;
+      transform: translateY(-50%);
+      background: var(--green-400);
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / contain no-repeat;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / contain no-repeat;
+    }
+
+    .carousel-controls {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
-      font-weight: 800;
-      margin-bottom: 20px;
-    }
-
-    .slide h3 {
-      font-size: clamp(2rem, 4vw, 3.4rem);
-      line-height: 1.02;
-      letter-spacing: -0.055em;
-      margin-bottom: 20px;
-    }
-
-    .slide ul {
-      list-style: none;
-      display: grid;
-      gap: 14px;
-    }
-
-    .slide li {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.11);
-      padding: 16px 18px;
-      border-radius: 18px;
-      color: #eeeeee;
-    }
-
-    .dots {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
+      gap: 18px;
       margin-top: 38px;
     }
-
+    .dots { display: flex; gap: 10px; }
     .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      border: none;
-      background: rgba(255,255,255,0.28);
+      width: 10px; height: 10px; border-radius: 999px;
+      border: none; background: rgba(255,255,255,0.28);
+      cursor: pointer; transition: .25s ease; padding: 0;
+    }
+    .dot.active { width: 34px; background: var(--green-400); }
+    .arrow {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
       cursor: pointer;
-      transition: 0.2s ease;
+      display: flex; align-items: center; justify-content: center;
+      transition: .2s ease;
     }
+    .arrow:hover { background: rgba(255,255,255,0.16); }
+    .arrow svg { width: 18px; height: 18px; }
 
-    .dot.active {
-      width: 34px;
-      background: #35d46f;
-    }
-
+    /* ---------- Process ---------- */
     .process {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 22px;
       margin-top: 50px;
     }
-
     .step {
-      padding: 28px;
-      border-radius: 28px;
+      padding: 30px;
+      border-radius: 26px;
       background: #fff;
-      border: 1px solid #ededed;
-      box-shadow: 0 18px 45px rgba(0,0,0,0.035);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      transition: transform .25s ease, box-shadow .25s ease;
     }
-
-    .step span {
-      color: #268348;
+    .step:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .step .step-badge {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--green-400), var(--green-700));
+      color: #fff;
       font-weight: 800;
-      font-size: 0.9rem;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
     }
+    .step span.label { color: var(--green-600); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.06em; }
+    .step h3 { margin: 6px 0 10px; letter-spacing: -0.02em; }
+    .step p { color: var(--muted); }
 
-    .step h3 {
-      margin: 8px 0 10px;
-      letter-spacing: -0.03em;
-    }
-
+    /* ---------- Staff ---------- */
     .staff-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 28px;
       margin-top: 55px;
     }
-
     .staff-card {
       background: #fff;
-      border: 1px solid #ededed;
-      border-radius: 32px;
-      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 36px;
       text-align: left;
-      box-shadow: 0 20px 55px rgba(0,0,0,0.045);
+      box-shadow: var(--shadow-sm);
+      transition: transform .25s ease, box-shadow .25s ease;
     }
-
+    .staff-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
     .placeholder-img {
-      width: 98px;
-      height: 98px;
+      width: 92px; height: 92px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #dff8e7, #f7fff9);
-      border: 1px solid #d7f1df;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #25783f;
-      font-weight: 800;
-      font-size: 1.4rem;
+      background: linear-gradient(135deg, var(--green-400), var(--green-700));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 800; font-size: 1.5rem;
       margin-bottom: 22px;
+      box-shadow: 0 12px 26px rgba(21,98,47,.22);
     }
+    .staff-card h3 { font-size: 1.45rem; letter-spacing: -0.03em; }
+    .title { color: var(--green-600); font-weight: 700; margin: 6px 0 16px; }
+    .staff-card p { color: var(--muted); }
 
-    .staff-card h3 {
-      font-size: 1.45rem;
-      letter-spacing: -0.035em;
-    }
-
-    .title {
-      color: #268348;
-      font-weight: 800;
-      margin: 6px 0 16px;
-    }
-
-    .contact-box {
-      text-align: center;
-      background: #f8f8f8;
-      border: 1px solid #ededed;
-      border-radius: 38px;
-      padding: 82px 42px;
-    }
-
-    .contact-details {
-      margin-top: 34px;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .contact-pill {
-      display: inline-block;
+    /* ---------- FAQ ---------- */
+    .faq-grid { max-width: 820px; margin: 50px auto 0; display: grid; gap: 14px; text-align: left; }
+    .faq {
       background: #fff;
-      color: #111;
-      border: 1px solid #e5e5e5;
-      text-decoration: none;
-      padding: 14px 22px;
-      border-radius: 999px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .faq summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 22px 26px;
       font-weight: 700;
+      font-size: 1.08rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
     }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after {
+      content: "+";
+      font-size: 1.5rem;
+      color: var(--green-600);
+      font-weight: 400;
+      transition: transform .25s ease;
+      line-height: 1;
+    }
+    .faq[open] summary::after { transform: rotate(45deg); }
+    .faq .faq-body { padding: 0 26px 24px; color: var(--muted); }
 
+    /* ---------- Contact ---------- */
+    .contact-box {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 38px;
+      padding: 64px 48px;
+      box-shadow: var(--shadow-md);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: start;
+    }
+    .contact-info h2 { margin-bottom: 16px; }
+    .contact-details { margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
+    .contact-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--mint-50);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      text-decoration: none;
+      padding: 14px 20px;
+      border-radius: 16px;
+      font-weight: 600;
+      transition: .2s ease;
+    }
+    .contact-pill:hover { background: var(--mint-100); transform: translateX(2px); }
+    .contact-pill svg { width: 20px; height: 20px; color: var(--green-600); flex-shrink: 0; }
+
+    .contact-form { display: grid; gap: 14px; }
+    .field { display: grid; gap: 6px; text-align: left; }
+    .field label { font-size: 0.88rem; font-weight: 600; color: #38463c; }
+    .field input,
+    .field textarea {
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 13px 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--mint-50);
+      color: var(--ink);
+      transition: .2s ease;
+      width: 100%;
+    }
+    .field input:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--green-500);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(46,158,79,0.12);
+    }
+    .field textarea { resize: vertical; min-height: 120px; }
+    .form-note { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+    .honey { position: absolute; left: -9999px; opacity: 0; height: 0; }
+
+    /* ---------- Footer ---------- */
     footer {
-      padding: 55px 0;
+      background: linear-gradient(180deg, #fff, var(--mint-50));
+      border-top: 1px solid var(--line);
+      padding: 64px 0 36px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .footer-brand img { height: 44px; width: auto; margin-bottom: 16px; }
+    .footer-brand p { color: var(--muted); max-width: 320px; }
+    .footer-col h4 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green-700); margin-bottom: 14px; }
+    .footer-col a {
+      display: block;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 5px 0;
+      transition: color .2s ease;
+    }
+    .footer-col a:hover { color: var(--green-600); }
+    .footer-bottom {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
       text-align: center;
-      color: #888;
-      font-size: 0.95rem;
+      color: var(--muted);
+      font-size: 0.92rem;
     }
 
-@media (max-width: 820px) {
-  .container {
-    padding: 0 20px;
-  }
+    /* ---------- Scroll reveal ---------- */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
 
-  .nav-inner {
-    flex-direction: column;
-    gap: 12px;
-  }
+    /* ---------- Focus visibility ---------- */
+    a:focus-visible, button:focus-visible, summary:focus-visible,
+    input:focus-visible, textarea:focus-visible {
+      outline: 3px solid var(--green-400);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
 
-  .nav-logo img {
-    height: 46px;
-  }
+    /* ---------- Responsive ---------- */
+    @media (max-width: 920px) {
+      .contact-box { grid-template-columns: 1fr; gap: 36px; padding: 48px 30px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
 
-  .nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 14px;
-    font-size: 0.88rem;
-  }
+    @media (max-width: 820px) {
+      .nav-links, .nav-cta.desk { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-right {
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(243, 251, 245, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        gap: 0;
+        padding: 0 24px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .3s ease, padding .3s ease;
+        border-bottom: 1px solid var(--line);
+      }
+      .nav-right.open { max-height: 420px; padding: 14px 24px 24px; }
+      .nav-links { display: flex; flex-direction: column; gap: 0; width: 100%; }
+      .nav-links a { padding: 13px 0; border-bottom: 1px solid var(--line); }
+      .nav-cta { display: inline-flex !important; margin-top: 16px; width: 100%; }
+      .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .nav-toggle.open span:nth-child(2) { opacity: 0; }
+      .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  .hero {
-    min-height: auto;
-    padding: 90px 0 70px;
-  }
+      .hero { min-height: auto; padding: 80px 0 70px; }
+      .hero-logo { width: 200px; }
+      section { padding: 78px 0; }
+      .training-showcase { border-radius: 28px; padding: 46px 22px; }
+      .slide.active { grid-template-columns: 1fr; gap: 26px; }
+      .slide-number { width: 70px; height: 70px; border-radius: 20px; font-size: 1.4rem; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: auto; }
+    }
 
-  .hero-logo {
-    width: 210px;
-    max-width: 80%;
-    margin-bottom: 28px;
-  }
+    @media (max-width: 420px) {
+      h1 { font-size: 2.7rem; }
+      h2 { font-size: 2rem; }
+      .hero-logo { width: 170px; }
+      .button, .button-light { width: 100%; }
+      .hero-actions { flex-direction: column; }
+      .card, .staff-card, .step { padding: 26px; border-radius: 22px; }
+    }
 
-  h1 {
-    font-size: clamp(2.7rem, 14vw, 4.4rem);
-    letter-spacing: -0.06em;
-  }
-
-  .subtitle {
-    font-size: 1.08rem;
-  }
-
-  .button,
-  .button-light {
-    display: block;
-    width: 100%;
-    max-width: 290px;
-    margin: 12px auto 0;
-    text-align: center;
-  }
-
-  section {
-    padding: 76px 0;
-  }
-
-  .cards,
-  .staff-grid,
-  .process {
-    grid-template-columns: 1fr;
-  }
-
-  .training-showcase {
-    border-radius: 30px;
-    padding: 46px 22px;
-  }
-
-  .slides {
-    min-height: auto;
-  }
-
-  .slide.active {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-
-  .slide-number {
-    width: 74px;
-    height: 74px;
-    border-radius: 22px;
-    font-size: 1.5rem;
-  }
-
-  .slide h3 {
-    font-size: 2.2rem;
-  }
-
-  .slide li {
-    font-size: 0.95rem;
-  }
-
-  .contact-box {
-    border-radius: 30px;
-    padding: 52px 22px;
-  }
-
-  .contact-pill {
-    width: 100%;
-    max-width: 310px;
-  }
-}
-
-@media (max-width: 420px) {
-  .nav-links {
-    font-size: 0.82rem;
-    gap: 10px;
-  }
-
-  h1 {
-    font-size: 2.85rem;
-  }
-
-  h2 {
-    font-size: 2.1rem;
-  }
-
-  .hero-logo {
-    width: 185px;
-  }
-
-  .card,
-  .staff-card,
-  .step {
-    padding: 26px;
-    border-radius: 24px;
-  }
-}
+    /* ---------- Reduced motion ---------- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
   </style>
 </head>
 
@@ -518,59 +697,103 @@
 <nav>
   <div class="container">
     <div class="nav-inner">
-      <a class="nav-logo" href="#">
-        <img src="logo.png" alt="GreenPath logo">
+      <a class="nav-logo" href="#top" aria-label="GreenPath home">
+        <img src="logo.png" alt="GreenPath logo" />
       </a>
 
-      <div class="nav-links">
-        <a href="#services">Services</a>
-        <a href="#training">Training</a>
-        <a href="#staff">Staff</a>
-        <a href="#contact">Contact</a>
+      <div class="nav-right" id="navMenu">
+        <div class="nav-links">
+          <a href="#services">Services</a>
+          <a href="#training">Training</a>
+          <a href="#staff">Staff</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <a href="#contact" class="button nav-cta">Book a Seminar</a>
       </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </nav>
 
-<section class="hero">
+<section class="hero" id="top">
   <div class="container">
-    <img class="hero-logo" src="logo.png" alt="GreenPath logo">
+    <img class="hero-logo" src="logo.png" alt="GreenPath logo" />
 
-    <h1>Navigate the Digital World Safely.</h1>
+    <div class="eyebrow"><span class="dot-live"></span> Digital safety education for your community</div>
+
+    <h1>Navigate the digital world <span class="accent">safely.</span></h1>
 
     <p class="subtitle">
       GreenPath helps seniors, families, and communities recognize scams,
-      avoid fraud, and build confidence in today’s connected world.
+      avoid fraud, and build confidence in today's connected world.
     </p>
 
-    <a href="#contact" class="button">Request a Seminar</a>
-    <a href="#training" class="button button-light">View Training Topics</a>
+    <div class="hero-actions">
+      <a href="#contact" class="button">Request a Seminar</a>
+      <a href="#training" class="button button-light">View Training Topics</a>
+    </div>
+
+    <div class="hero-trust">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> In-person &amp; virtual sessions</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Plain-language, no jargon</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Tailored to your group</span>
+    </div>
   </div>
 </section>
 
+<div class="value-band">
+  <div class="container">
+    <div class="value-grid reveal">
+      <div class="value-item">
+        <div class="num">4</div>
+        <p>Core training modules</p>
+      </div>
+      <div class="value-item">
+        <div class="num">3</div>
+        <p>Simple steps people remember</p>
+      </div>
+      <div class="value-item">
+        <div class="num">All</div>
+        <p>Group sizes welcome</p>
+      </div>
+      <div class="value-item">
+        <div class="num">$0</div>
+        <p>Cost for an intro consultation</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <section id="services">
   <div class="container center">
-    <h2>Digital safety made simple.</h2>
-
-    <p class="section-text">
+    <span class="kicker reveal">What we do</span>
+    <h2 class="reveal">Digital safety made simple.</h2>
+    <p class="section-text reveal">
       Technology should empower people, not intimidate them. Our seminars focus
       on real-world examples, practical skills, and simple habits that help people
       stay safer online.
     </p>
 
     <div class="cards">
-      <div class="card">
+      <div class="card reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <h3>Scam Awareness</h3>
         <p>Recognize phishing emails, fake texts, scam calls, fraudulent websites, and social engineering tactics.</p>
       </div>
 
-      <div class="card">
+      <div class="card reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
         <h3>Identity Protection</h3>
         <p>Learn how to protect personal information, strengthen passwords, and reduce identity theft risk.</p>
       </div>
 
-      <div class="card">
-        <h3>AI & Emerging Threats</h3>
+      <div class="card reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></div>
+        <h3>AI &amp; Emerging Threats</h3>
         <p>Understand voice cloning, deepfakes, QR code scams, and the new tactics scammers use every day.</p>
       </div>
     </div>
@@ -579,8 +802,9 @@
 
 <section id="training">
   <div class="container">
-    <div class="training-showcase">
+    <div class="training-showcase reveal">
       <div class="center">
+        <span class="kicker">The curriculum</span>
         <h2>What the training covers.</h2>
         <p class="section-text">
           Each session is built around clear examples, guided discussion, and practical takeaways
@@ -588,14 +812,12 @@
         </p>
       </div>
 
-      <div class="slides">
+      <div class="slides" id="slides">
         <div class="slide active">
           <div>
             <div class="slide-number">01</div>
             <h3>Spotting everyday scams.</h3>
-            <p>
-              Participants learn how scammers create urgency, fear, curiosity, and confusion to pressure people into acting quickly.
-            </p>
+            <p>Participants learn how scammers create urgency, fear, curiosity, and confusion to pressure people into acting quickly.</p>
           </div>
           <ul>
             <li>Suspicious phone calls and voicemails</li>
@@ -609,9 +831,7 @@
           <div>
             <div class="slide-number">02</div>
             <h3>Protecting personal information.</h3>
-            <p>
-              We explain simple ways to reduce identity theft risk without overwhelming participants with technical jargon.
-            </p>
+            <p>We explain simple ways to reduce identity theft risk without overwhelming participants with technical jargon.</p>
           </div>
           <ul>
             <li>Password habits that actually work</li>
@@ -625,9 +845,7 @@
           <div>
             <div class="slide-number">03</div>
             <h3>Understanding modern threats.</h3>
-            <p>
-              Scams are changing quickly. We help communities understand newer threats in plain language.
-            </p>
+            <p>Scams are changing quickly. We help communities understand newer threats in plain language.</p>
           </div>
           <ul>
             <li>AI voice cloning and family emergency scams</li>
@@ -641,9 +859,7 @@
           <div>
             <div class="slide-number">04</div>
             <h3>Knowing what to do next.</h3>
-            <p>
-              The goal is not just awareness. Participants leave with a simple action plan.
-            </p>
+            <p>The goal is not just awareness. Participants leave with a simple action plan.</p>
           </div>
           <ul>
             <li>How to verify before trusting a message</li>
@@ -654,11 +870,19 @@
         </div>
       </div>
 
-      <div class="dots">
-        <button class="dot active" onclick="showSlide(0)"></button>
-        <button class="dot" onclick="showSlide(1)"></button>
-        <button class="dot" onclick="showSlide(2)"></button>
-        <button class="dot" onclick="showSlide(3)"></button>
+      <div class="carousel-controls">
+        <button class="arrow" id="prevSlide" aria-label="Previous topic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="dots" role="tablist" aria-label="Training topics">
+          <button class="dot active" onclick="showSlide(0)" aria-label="Topic 1"></button>
+          <button class="dot" onclick="showSlide(1)" aria-label="Topic 2"></button>
+          <button class="dot" onclick="showSlide(2)" aria-label="Topic 3"></button>
+          <button class="dot" onclick="showSlide(3)" aria-label="Topic 4"></button>
+        </div>
+        <button class="arrow" id="nextSlide" aria-label="Next topic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
       </div>
     </div>
   </div>
@@ -666,28 +890,29 @@
 
 <section>
   <div class="container center">
-    <h2>A simple framework people remember.</h2>
-
-    <p class="section-text">
+    <span class="kicker reveal">Our framework</span>
+    <h2 class="reveal">A simple framework people remember.</h2>
+    <p class="section-text reveal">
       GreenPath training uses a repeatable approach that helps participants slow down,
       think clearly, and make safer decisions.
     </p>
 
     <div class="process">
-      <div class="step">
-        <span>STEP 1</span>
+      <div class="step reveal">
+        <div class="step-badge">1</div>
+        <span class="label">STEP ONE</span>
         <h3>Recognize</h3>
         <p>Identify warning signs, pressure tactics, suspicious links, and unusual requests.</p>
       </div>
-
-      <div class="step">
-        <span>STEP 2</span>
+      <div class="step reveal">
+        <div class="step-badge">2</div>
+        <span class="label">STEP TWO</span>
         <h3>Verify</h3>
         <p>Confirm the source through trusted contact methods before sharing information or money.</p>
       </div>
-
-      <div class="step">
-        <span>STEP 3</span>
+      <div class="step reveal">
+        <div class="step-badge">3</div>
+        <span class="label">STEP THREE</span>
         <h3>Act</h3>
         <p>Report suspicious activity, contact the right organization, and protect accounts quickly.</p>
       </div>
@@ -697,25 +922,26 @@
 
 <section>
   <div class="container">
-    <h2>Designed for communities.</h2>
-
-    <p class="section-text">
+    <span class="kicker reveal">Who we serve</span>
+    <h2 class="reveal">Designed for communities.</h2>
+    <p class="section-text reveal">
       We support retirement communities, assisted living facilities, churches,
       libraries, veterans groups, senior centers, and local organizations.
     </p>
 
     <div class="cards">
-      <div class="card">
+      <div class="card reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
         <h3>Community Seminars</h3>
         <p>Clear, engaging presentations designed for residents, families, and community members.</p>
       </div>
-
-      <div class="card">
+      <div class="card reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
         <h3>Interactive Workshops</h3>
         <p>Hands-on examples using suspicious emails, texts, scam calls, and realistic fraud scenarios.</p>
       </div>
-
-      <div class="card">
+      <div class="card reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></div>
         <h3>Ongoing Awareness</h3>
         <p>Recurring sessions and updated materials to help communities keep up with changing scams.</p>
       </div>
@@ -725,31 +951,30 @@
 
 <section id="staff">
   <div class="container center">
-    <h2>Meet the staff.</h2>
-
-    <p class="section-text">
+    <span class="kicker reveal">Meet the team</span>
+    <h2 class="reveal">Meet the staff.</h2>
+    <p class="section-text reveal">
       GreenPath was created by brothers with a shared commitment to helping people feel safer,
       more informed, and more confident with technology.
     </p>
 
     <div class="staff-grid">
-      <div class="staff-card">
+      <div class="staff-card reveal">
         <div class="placeholder-img">JG</div>
         <h3>Jadian Green</h3>
-        <div class="title">Founder & Executive Lead</div>
+        <div class="title">Founder &amp; Executive Lead</div>
         <p>
           Jadian founded GreenPath with the goal of helping seniors and community members
           better understand the digital risks they face every day. His focus includes outreach,
           partnerships, program direction, and making GreenPath training practical and approachable.
         </p>
       </div>
-
-      <div class="staff-card">
+      <div class="staff-card reveal">
         <div class="placeholder-img">JG</div>
         <h3>Julian Green</h3>
-        <div class="title">Technical Director & Solutions Architect</div>
+        <div class="title">Technical Director &amp; Solutions Architect</div>
         <p>
-          Julian supports GreenPath’s technical strategy, website development, training structure,
+          Julian supports GreenPath's technical strategy, website development, training structure,
           and cybersecurity content. His background in technology and infrastructure helps translate
           complex digital safety topics into clear, useful guidance.
         </p>
@@ -758,47 +983,183 @@
   </div>
 </section>
 
+<section id="faq">
+  <div class="container center">
+    <span class="kicker reveal">Questions</span>
+    <h2 class="reveal">Frequently asked questions.</h2>
+    <p class="section-text reveal">
+      A few of the things organizations ask us most often. Have another question? Just reach out.
+    </p>
+
+    <div class="faq-grid">
+      <details class="faq reveal">
+        <summary>How long is a typical seminar?</summary>
+        <div class="faq-body">Most sessions run 45–90 minutes, including time for questions. We can adjust the length and depth to fit your group and schedule.</div>
+      </details>
+      <details class="faq reveal">
+        <summary>Who is the training designed for?</summary>
+        <div class="faq-body">Our content is built for everyday people — especially seniors, families, and community members — with no technical background required. Everything is taught in plain language.</div>
+      </details>
+      <details class="faq reveal">
+        <summary>Can you come to our location?</summary>
+        <div class="faq-body">Yes. We offer in-person seminars at your community, facility, or organization, as well as virtual sessions when that's a better fit.</div>
+      </details>
+      <details class="faq reveal">
+        <summary>Do you tailor the content to our group?</summary>
+        <div class="faq-body">Absolutely. We adapt examples and emphasis based on your audience — whether that's a retirement community, library, church, or veterans group.</div>
+      </details>
+      <details class="faq reveal">
+        <summary>How do we get started?</summary>
+        <div class="faq-body">Reach out through the contact form below or email us directly. We'll set up a short, no-cost conversation to understand your needs and recommend the right session.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
 <section id="contact">
   <div class="container">
-    <div class="contact-box">
-      <h2>Interested in a seminar?</h2>
+    <div class="contact-box reveal">
+      <div class="contact-info">
+        <span class="kicker">Get in touch</span>
+        <h2>Interested in a seminar?</h2>
+        <p class="section-text">
+          Contact GreenPath to discuss a digital safety seminar, workshop,
+          or awareness session for your community or organization.
+        </p>
 
-      <p class="section-text" style="margin: 0 auto;">
-        Contact GreenPath to discuss a digital safety seminar, workshop,
-        or awareness session for your community or organization.
-      </p>
-
-      <div class="contact-details">
-        <a class="contact-pill" href="mailto:info@greenpath.com">info@greenpath.com</a>
-        <a class="contact-pill" href="tel:+14025550123">(402) 555-0123</a>
+        <div class="contact-details">
+          <a class="contact-pill" href="mailto:info@greenpath.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+            info@greenpath.com
+          </a>
+          <a class="contact-pill" href="tel:+14025550123">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            (402) 555-0123
+          </a>
+        </div>
       </div>
+
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="field">
+          <label for="cf-name">Name</label>
+          <input type="text" id="cf-name" name="name" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="cf-org">Organization</label>
+          <input type="text" id="cf-org" name="organization" autocomplete="organization" />
+        </div>
+        <div class="field">
+          <label for="cf-email">Email</label>
+          <input type="email" id="cf-email" name="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="cf-message">How can we help?</label>
+          <textarea id="cf-message" name="message" placeholder="Tell us about your group and what you're looking for…" required></textarea>
+        </div>
+        <!-- honeypot anti-spam: hidden from real users -->
+        <input class="honey" type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <button type="submit" class="button">Send Message</button>
+        <p class="form-note">This opens your email app with the message pre-filled. Prefer to email us directly? <a href="mailto:info@greenpath.com" style="color:var(--green-600);font-weight:600;">info@greenpath.com</a></p>
+      </form>
     </div>
   </div>
 </section>
 
 <footer>
-  © 2026 GreenPath. All rights reserved.
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="logo.png" alt="GreenPath logo" />
+        <p>Practical digital-safety education that helps seniors, families, and communities recognize scams and stay confident online.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="#services">Services</a>
+        <a href="#training">Training</a>
+        <a href="#staff">Staff</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:info@greenpath.com">info@greenpath.com</a>
+        <a href="tel:+14025550123">(402) 555-0123</a>
+        <a href="#contact">Request a seminar</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © <span id="year">2026</span> GreenPath. All rights reserved.
+    </div>
+  </div>
 </footer>
 
 <script>
+  /* ---------- Mobile nav ---------- */
+  const navToggle = document.getElementById("navToggle");
+  const navMenu = document.getElementById("navMenu");
+  navToggle.addEventListener("click", () => {
+    const open = navMenu.classList.toggle("open");
+    navToggle.classList.toggle("open", open);
+    navToggle.setAttribute("aria-expanded", open);
+  });
+  navMenu.querySelectorAll("a").forEach(a =>
+    a.addEventListener("click", () => {
+      navMenu.classList.remove("open");
+      navToggle.classList.remove("open");
+      navToggle.setAttribute("aria-expanded", "false");
+    })
+  );
+
+  /* ---------- Training carousel ---------- */
   let currentSlide = 0;
   const slides = document.querySelectorAll(".slide");
   const dots = document.querySelectorAll(".dot");
+  let timer;
 
   function showSlide(index) {
     slides[currentSlide].classList.remove("active");
     dots[currentSlide].classList.remove("active");
-
-    currentSlide = index;
-
+    currentSlide = (index + slides.length) % slides.length;
     slides[currentSlide].classList.add("active");
     dots[currentSlide].classList.add("active");
   }
+  function nextSlide() { showSlide(currentSlide + 1); }
+  function prevSlide() { showSlide(currentSlide - 1); }
 
-  setInterval(() => {
-    let nextSlide = (currentSlide + 1) % slides.length;
-    showSlide(nextSlide);
-  }, 6000);
+  function startTimer() { timer = setInterval(nextSlide, 6000); }
+  function resetTimer() { clearInterval(timer); startTimer(); }
+
+  document.getElementById("nextSlide").addEventListener("click", () => { nextSlide(); resetTimer(); });
+  document.getElementById("prevSlide").addEventListener("click", () => { prevSlide(); resetTimer(); });
+  dots.forEach((d) => d.addEventListener("click", resetTimer));
+
+  const showcase = document.getElementById("slides");
+  showcase.addEventListener("mouseenter", () => clearInterval(timer));
+  showcase.addEventListener("mouseleave", startTimer);
+  startTimer();
+
+  /* ---------- Scroll reveal ---------- */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  /* ---------- Contact form -> email compose ---------- */
+  const form = document.getElementById("contactForm");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (form.company_website.value) return; // honeypot: silently drop bots
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    const name = form.name.value.trim();
+    const org = form.organization.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+    const subject = encodeURIComponent(`Seminar inquiry from ${name}${org ? " (" + org + ")" : ""}`);
+    const body = encodeURIComponent(`Name: ${name}\nOrganization: ${org || "—"}\nEmail: ${email}\n\n${message}`);
+    window.location.href = `mailto:info@greenpath.com?subject=${subject}&body=${body}`;
+  });
+
+  /* ---------- Current year ---------- */
+  document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 
 </body>

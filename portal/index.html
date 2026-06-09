@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal | GreenPath Horizons</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green-900:#0e3d1f; --green-700:#15622f; --green-600:#1d7a3c; --green-500:#2e9e4f; --green-400:#57c14e;
+      --mint-50:#f3fbf5; --mint-100:#e7f8ec; --ink:#0f1a14; --muted:#5b6b60; --line:rgba(15,60,31,0.10);
+      --shadow-sm:0 10px 30px rgba(14,61,31,0.06); --shadow-md:0 20px 55px rgba(14,61,31,0.08);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--ink); background:var(--mint-50); line-height:1.6; }
+    .container { max-width:1050px; margin:0 auto; padding:0 22px; }
+
+    header {
+      position:sticky; top:0; z-index:20;
+      background:rgba(243,251,245,0.85); backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--line);
+    }
+    .bar { display:flex; align-items:center; justify-content:space-between; padding:12px 0; gap:14px; }
+    .bar-left { display:flex; align-items:center; gap:12px; }
+    .bar-left img { height:38px; width:auto; }
+    .pill { font-size:0.78rem; font-weight:700; color:var(--green-700); background:var(--mint-100); border:1px solid rgba(46,158,79,.2); padding:4px 11px; border-radius:999px; }
+    .bar-right { display:flex; align-items:center; gap:14px; }
+    .who { font-size:0.9rem; color:var(--muted); }
+    .who b { color:var(--ink); }
+    .logout { font-family:inherit; font-size:0.88rem; font-weight:600; cursor:pointer; color:var(--green-700); background:#fff; border:1px solid var(--line); padding:8px 16px; border-radius:999px; }
+    .logout:hover { background:var(--mint-100); }
+
+    main { padding:44px 0 80px; }
+    h1 { font-size:clamp(1.8rem,4vw,2.6rem); letter-spacing:-0.03em; margin-bottom:6px; }
+    .lead { color:var(--muted); margin-bottom:36px; }
+    h2 { font-size:1.15rem; letter-spacing:-0.02em; margin:34px 0 16px; }
+    .kicker { text-transform:uppercase; letter-spacing:0.12em; font-size:0.72rem; font-weight:700; color:var(--green-600); }
+
+    .tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:18px; }
+    .tile {
+      display:block; text-decoration:none; color:inherit;
+      background:#fff; border:1px solid var(--line); border-radius:22px; padding:26px;
+      box-shadow:var(--shadow-sm); transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .tile:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); }
+    .tile .ico { width:48px; height:48px; border-radius:14px; background:linear-gradient(135deg,var(--mint-100),#fff); border:1px solid rgba(46,158,79,.2); display:flex; align-items:center; justify-content:center; color:var(--green-600); margin-bottom:16px; }
+    .tile .ico svg { width:24px; height:24px; }
+    .tile h3 { font-size:1.08rem; letter-spacing:-0.02em; margin-bottom:5px; }
+    .tile p { color:var(--muted); font-size:0.92rem; }
+    .tile .todo { display:inline-block; margin-top:10px; font-size:0.76rem; font-weight:600; color:#a06a00; background:#fff7e6; border:1px solid #ffe3a3; padding:3px 9px; border-radius:999px; }
+
+    .panel { background:#fff; border:1px solid var(--line); border-radius:22px; box-shadow:var(--shadow-sm); padding:28px; }
+    .panel.hidden { display:none; }
+    table { width:100%; border-collapse:collapse; margin-top:6px; }
+    th, td { text-align:left; padding:11px 10px; border-bottom:1px solid var(--line); font-size:0.92rem; }
+    th { font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); }
+    .role-tag { font-size:0.74rem; font-weight:700; padding:2px 9px; border-radius:999px; }
+    .role-tag.admin { color:var(--green-700); background:var(--mint-100); }
+    .role-tag.instructor { color:#555; background:#f0f1f0; }
+    .del { font-family:inherit; cursor:pointer; font-size:0.82rem; font-weight:600; color:#a12626; background:#fdecec; border:1px solid #f5c6c6; padding:6px 12px; border-radius:999px; }
+    .del:hover { background:#fbdcdc; }
+    .del:disabled { opacity:.4; cursor:default; }
+
+    .newuser { display:grid; grid-template-columns:1fr 1fr auto auto; gap:10px; align-items:end; margin-top:22px; padding-top:22px; border-top:1px solid var(--line); }
+    .newuser .f label { display:block; font-size:0.78rem; font-weight:600; color:#38463c; margin-bottom:5px; }
+    .newuser input, .newuser select { width:100%; font-family:inherit; font-size:0.95rem; padding:10px 12px; border:1px solid var(--line); border-radius:11px; background:var(--mint-50); }
+    .newuser input:focus, .newuser select:focus { outline:none; border-color:var(--green-500); background:#fff; box-shadow:0 0 0 3px rgba(46,158,79,.12); }
+    .btn { font-family:inherit; font-weight:700; font-size:0.92rem; color:#fff; cursor:pointer; border:none; padding:11px 18px; border-radius:11px; background:linear-gradient(135deg,var(--green-500),var(--green-700)); white-space:nowrap; }
+    .btn:disabled { opacity:.6; cursor:default; }
+    .msg { margin-top:14px; font-size:0.88rem; display:none; }
+    .msg.show { display:block; }
+    .msg.ok { color:var(--green-700); }
+    .msg.err { color:#a12626; }
+    .hint { color:var(--muted); font-size:0.9rem; margin-top:4px; }
+
+    @media (max-width:680px) {
+      .newuser { grid-template-columns:1fr 1fr; }
+      .bar-right .who { display:none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="bar">
+        <div class="bar-left">
+          <img src="/logo.png" alt="GreenPath Horizons" />
+          <span class="pill">Portal</span>
+        </div>
+        <div class="bar-right">
+          <span class="who">Signed in as <b id="whoami">…</b></span>
+          <button class="logout" id="logout">Log out</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h1>Welcome back<span id="firstName"></span>.</h1>
+      <p class="lead">Your shared training materials, workbooks, and files — all in one place.</p>
+
+      <span class="kicker">Resources</span>
+      <h2 style="margin-top:10px;">Training material</h2>
+      <div class="tiles" id="tiles"></div>
+
+      <section class="panel hidden" id="adminPanel" style="margin-top:40px;">
+        <span class="kicker">Admin</span>
+        <h2 style="margin-top:8px; margin-bottom:4px;">Manage team accounts</h2>
+        <p class="hint">Create or remove logins for your team. New users sign in at <b>/login</b>.</p>
+
+        <table id="usersTable">
+          <thead><tr><th>Username</th><th>Role</th><th>Added</th><th></th></tr></thead>
+          <tbody id="usersBody"></tbody>
+        </table>
+
+        <form class="newuser" id="newUserForm">
+          <div class="f">
+            <label for="nu-username">New username</label>
+            <input type="text" id="nu-username" autocapitalize="none" spellcheck="false" placeholder="e.g. alex" />
+          </div>
+          <div class="f">
+            <label for="nu-password">Temp password</label>
+            <input type="text" id="nu-password" placeholder="min 8 characters" />
+          </div>
+          <div class="f">
+            <label for="nu-role">Role</label>
+            <select id="nu-role">
+              <option value="instructor">Instructor</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <button class="btn" type="submit" id="nu-submit">Add user</button>
+        </form>
+        <div class="msg" id="adminMsg"></div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    /* ──────────────────────────────────────────────────────────────
+       Edit these links to point at your Notion pages, then re-deploy.
+       (Open the Notion page → Share → Copy link, and paste below.)
+       ────────────────────────────────────────────────────────────── */
+    const NOTION = {
+      materials: "https://www.notion.so/",   // ← Training materials page
+      workbooks: "https://www.notion.so/",   // ← Workbooks page
+      files:     "https://www.notion.so/",   // ← Shared files page
+    };
+
+    const ICONS = {
+      materials: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+      workbooks: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>',
+      files:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>',
+    };
+
+    const TILES = [
+      { key:'materials', title:'Training Materials', desc:'Slides, talking points, and session outlines.' },
+      { key:'workbooks', title:'Workbooks', desc:'Participant handouts and printable workbooks.' },
+      { key:'files',     title:'Shared Files', desc:'Logos, flyers, and other shared assets.' },
+    ];
+
+    function renderTiles() {
+      document.getElementById('tiles').innerHTML = TILES.map(t => {
+        const url = NOTION[t.key] || '';
+        const unset = !url || url === 'https://www.notion.so/';
+        const href = unset ? '#' : url;
+        const target = unset ? '' : 'target="_blank" rel="noopener"';
+        return `<a class="tile" href="${href}" ${target}>
+          <div class="ico">${ICONS[t.key]}</div>
+          <h3>${t.title}</h3>
+          <p>${t.desc}</p>
+          ${unset ? '<span class="todo">Add Notion link</span>' : ''}
+        </a>`;
+      }).join('');
+    }
+
+    async function loadMe() {
+      const res = await fetch('/api/me', { credentials:'same-origin' });
+      if (!res.ok) { location.href = '/login'; return null; }
+      return res.json();
+    }
+
+    async function loadUsers() {
+      const res = await fetch('/api/users', { credentials:'same-origin' });
+      if (!res.ok) return;
+      const { users } = await res.json();
+      const me = document.getElementById('whoami').textContent;
+      document.getElementById('usersBody').innerHTML = users.map(u => {
+        const date = new Date(u.created_at).toLocaleDateString();
+        const isSelf = u.username === me;
+        return `<tr>
+          <td><b>${u.username}</b>${isSelf ? ' <span class="hint">(you)</span>' : ''}</td>
+          <td><span class="role-tag ${u.role}">${u.role}</span></td>
+          <td>${date}</td>
+          <td style="text-align:right;">
+            <button class="del" data-user="${u.username}" ${isSelf ? 'disabled' : ''}>Remove</button>
+          </td>
+        </tr>`;
+      }).join('');
+
+      document.querySelectorAll('.del').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          if (!confirm(`Remove "${btn.dataset.user}"? They will no longer be able to sign in.`)) return;
+          const r = await fetch('/api/users?username=' + encodeURIComponent(btn.dataset.user), {
+            method:'DELETE', credentials:'same-origin',
+          });
+          if (r.ok) loadUsers(); else showMsg('Could not remove user.', false);
+        });
+      });
+    }
+
+    function showMsg(text, ok) {
+      const m = document.getElementById('adminMsg');
+      m.textContent = text;
+      m.className = 'msg show ' + (ok ? 'ok' : 'err');
+      setTimeout(() => m.classList.remove('show'), 4000);
+    }
+
+    document.getElementById('newUserForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('nu-submit');
+      const username = document.getElementById('nu-username').value.trim();
+      const password = document.getElementById('nu-password').value;
+      const role = document.getElementById('nu-role').value;
+      btn.disabled = true;
+      const res = await fetch('/api/users', {
+        method:'POST', credentials:'same-origin',
+        headers:{ 'Content-Type':'application/json' },
+        body: JSON.stringify({ username, password, role }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
+        showMsg(`Created "${username}". Share the username + temp password with them.`, true);
+        document.getElementById('nu-username').value = '';
+        document.getElementById('nu-password').value = '';
+        loadUsers();
+      } else {
+        showMsg(data.error || 'Could not create user.', false);
+      }
+      btn.disabled = false;
+    });
+
+    document.getElementById('logout').addEventListener('click', async () => {
+      await fetch('/api/logout', { method:'POST', credentials:'same-origin' });
+      location.href = '/login';
+    });
+
+    (async function init() {
+      renderTiles();
+      const me = await loadMe();
+      if (!me) return;
+      document.getElementById('whoami').textContent = me.username;
+      document.getElementById('firstName').textContent = ', ' + me.username;
+      if (me.role === 'admin') {
+        document.getElementById('adminPanel').classList.remove('hidden');
+        loadUsers();
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal | GreenPath Horizons</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green-700: #15622f; --green-600: #1d7a3c; --green-500: #2e9e4f;
+      --mint-50: #f3fbf5; --mint-100: #e7f8ec; --ink: #0f1a14; --muted: #5b6b60;
+      --line: rgba(15, 60, 31, 0.10);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      background: radial-gradient(120% 120% at 0% 0%, #eafaef, var(--mint-50) 60%);
+    }
+    .card {
+      width: 100%; max-width: 410px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      box-shadow: 0 28px 80px rgba(14, 61, 31, 0.12);
+      padding: 40px 34px;
+    }
+    .brand { text-align: center; margin-bottom: 26px; }
+    .brand img { height: 64px; width: auto; }
+    h1 { font-size: 1.4rem; letter-spacing: -0.02em; text-align: center; margin-bottom: 4px; }
+    .sub { text-align: center; color: var(--muted); font-size: 0.95rem; margin-bottom: 26px; }
+    label { display: block; font-size: 0.85rem; font-weight: 600; color: #38463c; margin-bottom: 6px; }
+    .field { margin-bottom: 16px; }
+    input {
+      width: 100%; font-family: inherit; font-size: 1rem;
+      padding: 13px 15px; border: 1px solid var(--line); border-radius: 13px;
+      background: var(--mint-50); color: var(--ink); transition: .2s ease;
+    }
+    input:focus {
+      outline: none; border-color: var(--green-500); background: #fff;
+      box-shadow: 0 0 0 4px rgba(46,158,79,0.12);
+    }
+    button {
+      width: 100%; margin-top: 6px; cursor: pointer; border: none;
+      font-family: inherit; font-size: 1rem; font-weight: 700; color: #fff;
+      padding: 14px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--green-500), var(--green-700));
+      box-shadow: 0 12px 26px rgba(21,98,47,0.28); transition: .2s ease;
+    }
+    button:hover { transform: translateY(-1px); }
+    button:disabled { opacity: .6; cursor: default; transform: none; }
+    .error {
+      display: none; margin-bottom: 16px; padding: 11px 14px; border-radius: 12px;
+      background: #fdecec; border: 1px solid #f5c6c6; color: #a12626; font-size: 0.9rem;
+    }
+    .error.show { display: block; }
+    .back { display: block; text-align: center; margin-top: 22px; font-size: 0.88rem; color: var(--muted); text-decoration: none; }
+    .back:hover { color: var(--green-600); }
+  </style>
+</head>
+<body>
+  <form class="card" id="loginForm" autocomplete="on">
+    <div class="brand"><img src="logo.png" alt="GreenPath Horizons" /></div>
+    <h1>Portal</h1>
+    <p class="sub">Sign in to access training materials.</p>
+
+    <div class="error" id="error"></div>
+
+    <div class="field">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" required />
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" autocomplete="current-password" required />
+    </div>
+
+    <button type="submit" id="submit">Sign in</button>
+    <a class="back" href="/">← Back to main site</a>
+  </form>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const errorBox = document.getElementById('error');
+    const submit = document.getElementById('submit');
+
+    function nextUrl() {
+      const p = new URLSearchParams(location.search).get('next');
+      // only allow same-site absolute paths (block //evil.com open-redirects)
+      return (p && p.startsWith('/') && !p.startsWith('//')) ? p : '/portal';
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorBox.classList.remove('show');
+      submit.disabled = true; submit.textContent = 'Signing in…';
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({
+            username: document.getElementById('username').value,
+            password: document.getElementById('password').value,
+          }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.ok) {
+          location.href = nextUrl();
+          return;
+        }
+        errorBox.textContent = data.error || 'Sign in failed. Please try again.';
+        errorBox.classList.add('show');
+      } catch {
+        errorBox.textContent = 'Network error. Please try again.';
+        errorBox.classList.add('show');
+      }
+      submit.disabled = false; submit.textContent = 'Sign in';
+    });
+  </script>
+</body>
+</html>

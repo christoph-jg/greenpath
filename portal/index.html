@@ -66,6 +66,7 @@
     .del:disabled { opacity:.4; cursor:default; }
 
     .newuser { display:grid; grid-template-columns:1fr 1fr auto auto; gap:10px; align-items:end; margin-top:22px; padding-top:22px; border-top:1px solid var(--line); }
+    .newuser.pw { grid-template-columns:1fr 1fr 1fr auto; }
     .newuser .f label { display:block; font-size:0.78rem; font-weight:600; color:#38463c; margin-bottom:5px; }
     .newuser input, .newuser select { width:100%; font-family:inherit; font-size:0.95rem; padding:10px 12px; border:1px solid var(--line); border-radius:11px; background:var(--mint-50); }
     .newuser input:focus, .newuser select:focus { outline:none; border-color:var(--green-500); background:#fff; box-shadow:0 0 0 3px rgba(46,158,79,.12); }
@@ -107,6 +108,28 @@
       <span class="kicker">Resources</span>
       <h2 style="margin-top:10px;">Training material</h2>
       <div class="tiles" id="tiles"></div>
+
+      <section class="panel" id="accountPanel" style="margin-top:40px;">
+        <span class="kicker">Your account</span>
+        <h2 style="margin-top:8px; margin-bottom:4px;">Change your password</h2>
+        <p class="hint">Set your own password — especially if you were given a shared temporary one.</p>
+        <form class="newuser pw" id="pwForm">
+          <div class="f">
+            <label for="pw-current">Current password</label>
+            <input type="password" id="pw-current" autocomplete="current-password" />
+          </div>
+          <div class="f">
+            <label for="pw-new">New password</label>
+            <input type="password" id="pw-new" autocomplete="new-password" placeholder="min 8 characters" />
+          </div>
+          <div class="f">
+            <label for="pw-confirm">Confirm new password</label>
+            <input type="password" id="pw-confirm" autocomplete="new-password" />
+          </div>
+          <button class="btn" type="submit" id="pw-submit">Update password</button>
+        </form>
+        <div class="msg" id="pwMsg"></div>
+      </section>
 
       <section class="panel hidden" id="adminPanel" style="margin-top:40px;">
         <span class="kicker">Admin</span>
@@ -241,6 +264,38 @@
         loadUsers();
       } else {
         showMsg(data.error || 'Could not create user.', false);
+      }
+      btn.disabled = false;
+    });
+
+    function showPwMsg(text, ok) {
+      const m = document.getElementById('pwMsg');
+      m.textContent = text;
+      m.className = 'msg show ' + (ok ? 'ok' : 'err');
+      if (ok) setTimeout(() => m.classList.remove('show'), 5000);
+    }
+
+    document.getElementById('pwForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const current = document.getElementById('pw-current').value;
+      const next = document.getElementById('pw-new').value;
+      const confirm = document.getElementById('pw-confirm').value;
+      if (next.length < 8) return showPwMsg('New password must be at least 8 characters.', false);
+      if (next !== confirm) return showPwMsg('New passwords do not match.', false);
+
+      const btn = document.getElementById('pw-submit');
+      btn.disabled = true;
+      const res = await fetch('/api/password', {
+        method:'POST', credentials:'same-origin',
+        headers:{ 'Content-Type':'application/json' },
+        body: JSON.stringify({ currentPassword: current, newPassword: next }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
+        document.getElementById('pwForm').reset();
+        showPwMsg('Password updated. Use it next time you sign in.', true);
+      } else {
+        showPwMsg(data.error || 'Could not update password.', false);
       }
       btn.disabled = false;
     });

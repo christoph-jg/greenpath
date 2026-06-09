@@ -61,8 +61,8 @@ The **first** successful login seeds the database with these accounts, all using
 | `aleunger.adm`    | admin |
 
 (The seeded team accounts are defined in `SEED_ACCOUNTS` at the top of
-`functions/api/login.js`.) Have everyone change their password later once a
-change-password screen is added, or recreate accounts with new passwords.
+`functions/api/login.js`.) Everyone should set their own password after first
+sign-in via the **Change your password** panel in the portal.
 
 After that works, you can (optionally) delete `BOOTSTRAP_USER` and `BOOTSTRAP_PASS` —
 the admin now lives in the database. Leave `SESSION_SECRET` in place permanently
@@ -91,5 +91,5 @@ same — this isn't throwaway work.
 ## Notes / current limits
 
 - Passwords are stored as PBKDF2-SHA256 hashes (100k iterations, per-user salt) — never plaintext, never in the repo.
-- There's no self-service "change my password" yet. To rotate the admin password for now: create a second admin, sign in as them, remove the first admin, recreate it. (A change-password screen is an easy future add.)
+- Everyone can set their own password in the portal via **Change your password** (verifies the current one first).
 - Sessions last 12 hours.

@@ -50,8 +50,19 @@ variables take effect.
 ## 5. First sign-in
 
 Go to `https://<your-site>/login` and sign in with `greenpath_admin` + your password.
-The **first** successful login auto-creates the admin account in the database from the
-bootstrap variables.
+The **first** successful login seeds the database with these accounts, all using
+`BOOTSTRAP_PASS` as their initial password (each can be changed/removed in the portal):
+
+| Username          | Role  |
+|-------------------|-------|
+| `greenpath_admin` | admin |
+| `julgreen.adm`    | admin |
+| `jadgreen.adm`    | admin |
+| `aleunger.adm`    | admin |
+
+(The seeded team accounts are defined in `SEED_ACCOUNTS` at the top of
+`functions/api/login.js`.) Have everyone change their password later once a
+change-password screen is added, or recreate accounts with new passwords.
 
 After that works, you can (optionally) delete `BOOTSTRAP_USER` and `BOOTSTRAP_PASS` —
 the admin now lives in the database. Leave `SESSION_SECRET` in place permanently

@@ -1,5 +1,13 @@
 import { verifyPassword, hashPassword, createToken, sessionCookie } from '../_lib/auth.js';
 
+// Accounts auto-created on first run, in addition to BOOTSTRAP_USER.
+// They all start with the BOOTSTRAP_PASS password. Edit/extend as needed.
+const SEED_ACCOUNTS = [
+  { username: 'julgreen.adm', role: 'admin' },
+  { username: 'jadgreen.adm', role: 'admin' },
+  { username: 'aleunger.adm', role: 'admin' },
+];
+
 function json(obj, status = 200, extraHeaders = {}) {
   return new Response(JSON.stringify(obj), {
     status,
@@ -21,14 +29,22 @@ export async function onRequestPost(context) {
   const password = body.password || '';
   if (!username || !password) return json({ error: 'Missing username or password' }, 400);
 
-  // First-run bootstrap: if there are no users yet, seed the admin from env secrets.
+  // First-run bootstrap: if there are no users yet, seed the admin + team
+  // accounts from env secrets. Each gets its own salt/hash.
   try {
     const countRow = await DB.prepare('SELECT COUNT(*) AS n FROM users').first();
     if (countRow && countRow.n === 0 && BOOTSTRAP_USER && BOOTSTRAP_PASS) {
-      const hash = await hashPassword(BOOTSTRAP_PASS);
-      await DB.prepare(
-        'INSERT INTO users (username, password, role, created_at) VALUES (?, ?, ?, ?)'
-      ).bind(BOOTSTRAP_USER, hash, 'admin', Date.now()).run();
+      const now = Date.now();
+      const seed = [{ username: BOOTSTRAP_USER, role: 'admin' }, ...SEED_ACCOUNTS];
+      const seen = new Set();
+      for (const acct of seed) {
+        if (!acct.username || seen.has(acct.username)) continue;
+        seen.add(acct.username);
+        const hash = await hashPassword(BOOTSTRAP_PASS);
+        await DB.prepare(
+          'INSERT OR IGNORE INTO users (username, password, role, created_at) VALUES (?, ?, ?, ?)'
+        ).bind(acct.username, hash, acct.role, now).run();
+      }
     }
   } catch (e) {
     return json({ error: 'Database not initialized. Run schema.sql (see SETUP-PORTAL.md).' }, 503);

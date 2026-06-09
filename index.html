@@ -355,14 +355,40 @@
       gap: 56px;
       align-items: center;
     }
+    .feature-media { position: relative; }
+    /* soft brand glow behind the photo, echoing the hero blobs */
+    .feature-media::before {
+      content: "";
+      position: absolute;
+      width: 64%; height: 64%;
+      right: -7%; bottom: -9%;
+      background: radial-gradient(circle, rgba(46,158,79,0.32), transparent 70%);
+      border-radius: 50%;
+      filter: blur(6px);
+      z-index: 0;
+    }
     .feature-media img {
+      position: relative;
+      z-index: 1;
       width: 100%;
       aspect-ratio: 3 / 2;
       object-fit: cover;
       border-radius: 28px;
       display: block;
-      box-shadow: var(--shadow-md);
-      border: 1px solid var(--line);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(46,158,79,0.18);
+      filter: saturate(0.95) contrast(1.02);
+    }
+    /* gentle green scrim on the lower edge to harmonize tone with the palette */
+    .feature-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      border-radius: 28px;
+      background: linear-gradient(155deg, rgba(46,158,79,0) 48%, rgba(20,74,39,0.22));
+      mix-blend-mode: multiply;
+      pointer-events: none;
     }
     .feature-list { list-style: none; display: grid; gap: 12px; margin-top: 26px; }
     .feature-list li { position: relative; padding-left: 32px; color: var(--muted); font-size: 1.05rem; }

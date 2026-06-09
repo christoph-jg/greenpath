@@ -1263,17 +1263,32 @@
   function nextSlide() { showSlide(currentSlide + 1); }
   function prevSlide() { showSlide(currentSlide - 1); }
 
-  function startTimer() { timer = setInterval(nextSlide, 6000); }
-  function resetTimer() { clearInterval(timer); startTimer(); }
+  // Autoplay only while the carousel is actually on screen (and not hovered).
+  let inView = false;
+  let hovering = false;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function updateAutoplay() {
+    clearInterval(timer);
+    timer = null;
+    if (inView && !hovering && !reduceMotion) {
+      timer = setInterval(nextSlide, 6000);
+    }
+  }
+  const resetTimer = updateAutoplay; // restart the countdown after manual navigation
 
   document.getElementById("nextSlide").addEventListener("click", () => { nextSlide(); resetTimer(); });
   document.getElementById("prevSlide").addEventListener("click", () => { prevSlide(); resetTimer(); });
   dots.forEach((d) => d.addEventListener("click", resetTimer));
 
   const showcase = document.getElementById("slides");
-  showcase.addEventListener("mouseenter", () => clearInterval(timer));
-  showcase.addEventListener("mouseleave", startTimer);
-  startTimer();
+  showcase.addEventListener("mouseenter", () => { hovering = true; updateAutoplay(); });
+  showcase.addEventListener("mouseleave", () => { hovering = false; updateAutoplay(); });
+
+  new IntersectionObserver((entries) => {
+    inView = entries[0].isIntersecting;
+    updateAutoplay();
+  }, { threshold: 0.2 }).observe(showcase);
 
   /* ---------- Scroll reveal ---------- */
   const io = new IntersectionObserver((entries) => {

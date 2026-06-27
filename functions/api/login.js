@@ -6,6 +6,7 @@ const SEED_ACCOUNTS = [
   { username: 'julgreen.adm', role: 'admin' },
   { username: 'jadgreen.adm', role: 'admin' },
   { username: 'aleunger.adm', role: 'admin' },
+  { username: 'bramay.adm', role: 'admin' },
 ];
 
 function json(obj, status = 200, extraHeaders = {}) {

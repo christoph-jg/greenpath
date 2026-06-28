@@ -166,13 +166,14 @@
 
   <script>
     /* ──────────────────────────────────────────────────────────────
-       Edit these links to point at your Notion pages, then re-deploy.
-       (Open the Notion page → Share → Copy link, and paste below.)
+       Paste your Google Drive folder share links below, then re-deploy.
+       (In Drive: right-click the folder → Share → Copy link.)
+       Leave a value as "" to show an "Add Drive link" badge on that tile.
        ────────────────────────────────────────────────────────────── */
-    const NOTION = {
-      materials: "https://www.notion.so/",   // ← Training materials page
-      workbooks: "https://www.notion.so/",   // ← Workbooks page
-      files:     "https://www.notion.so/",   // ← Shared files page
+    const DRIVE = {
+      materials: "",   // ← Training Materials folder link
+      workbooks: "",   // ← Workbooks folder link
+      files:     "",   // ← Shared Files folder link
     };
 
     const ICONS = {
@@ -189,15 +190,15 @@
 
     function renderTiles() {
       document.getElementById('tiles').innerHTML = TILES.map(t => {
-        const url = NOTION[t.key] || '';
-        const unset = !url || url === 'https://www.notion.so/';
+        const url = DRIVE[t.key] || '';
+        const unset = !url;
         const href = unset ? '#' : url;
         const target = unset ? '' : 'target="_blank" rel="noopener"';
         return `<a class="tile" href="${href}" ${target}>
           <div class="ico">${ICONS[t.key]}</div>
           <h3>${t.title}</h3>
           <p>${t.desc}</p>
-          ${unset ? '<span class="todo">Add Notion link</span>' : ''}
+          ${unset ? '<span class="todo">Add Drive link</span>' : ''}
         </a>`;
       }).join('');
     }

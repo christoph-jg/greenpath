@@ -103,10 +103,10 @@
   <main>
     <div class="container">
       <h1>Welcome back<span id="firstName"></span>.</h1>
-      <p class="lead">Your shared training materials, workbooks, and files — all in one place.</p>
+      <p class="lead">Your team workspace — files, tasks, and project tracking in Azure DevOps.</p>
 
-      <span class="kicker">Resources</span>
-      <h2 style="margin-top:10px;">Training material</h2>
+      <span class="kicker">Workspace</span>
+      <h2 style="margin-top:10px;">Files &amp; tasks</h2>
       <div class="tiles" id="tiles"></div>
 
       <section class="panel" id="accountPanel" style="margin-top:40px;">
@@ -166,31 +166,32 @@
 
   <script>
     /* ──────────────────────────────────────────────────────────────
-       Paste your Google Drive folder share links below, then re-deploy.
-       (In Drive: right-click the folder → Share → Copy link.)
-       Leave a value as "" to show an "Add Drive link" badge on that tile.
+       Links into the team's Azure DevOps project.
+       Tip: open the "File Management" epic in Azure Boards and paste its
+       URL into `files` below to land directly on it.
        ────────────────────────────────────────────────────────────── */
-    const DRIVE = {
-      materials: "",   // ← Training Materials folder link
-      workbooks: "",   // ← Workbooks folder link
-      files:     "",   // ← Shared Files folder link
+    const AZURE = "https://dev.azure.com/GreenpathHorizons/GreenPath%20Horizons";
+    const LINKS = {
+      files:   AZURE + "/_workitems",   // ← swap for the "File Management" epic's direct URL
+      boards:  AZURE + "/_boards",
+      project: AZURE,
     };
 
     const ICONS = {
-      materials: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
-      workbooks: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>',
-      files:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>',
+      files:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>',
+      boards:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>',
+      project: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
     };
 
     const TILES = [
-      { key:'materials', title:'Training Materials', desc:'Slides, talking points, and session outlines.' },
-      { key:'workbooks', title:'Workbooks', desc:'Participant handouts and printable workbooks.' },
-      { key:'files',     title:'Shared Files', desc:'Logos, flyers, and other shared assets.' },
+      { key:'files',   title:'File Management', desc:'Training materials, workbooks, and shared files (Files epic).' },
+      { key:'boards',  title:'Boards & Tasks', desc:'Track work, assignments, and progress.' },
+      { key:'project', title:'Project Home',   desc:'GreenPath Horizons in Azure DevOps.' },
     ];
 
     function renderTiles() {
       document.getElementById('tiles').innerHTML = TILES.map(t => {
-        const url = DRIVE[t.key] || '';
+        const url = LINKS[t.key] || '';
         const unset = !url;
         const href = unset ? '#' : url;
         const target = unset ? '' : 'target="_blank" rel="noopener"';
@@ -198,7 +199,7 @@
           <div class="ico">${ICONS[t.key]}</div>
           <h3>${t.title}</h3>
           <p>${t.desc}</p>
-          ${unset ? '<span class="todo">Add Drive link</span>' : ''}
+          ${unset ? '<span class="todo">Add link</span>' : ''}
         </a>`;
       }).join('');
     }
